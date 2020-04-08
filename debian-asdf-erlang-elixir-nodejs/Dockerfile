@@ -3,11 +3,20 @@ FROM debian:buster-slim AS base
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN=true
 ENV TZ Etc/UTC
-ENV LANGUAGE "en_US.UTF-8"
-ENV LC_ALL "en_US.UTF-8"
-ENV LANG "en_US.UTF-8"
 RUN echo "${TZ}" > /etc/timezone
 RUN ln -fs "/usr/share/zoneinfo/${TZ}" /etc/localtime
+
+RUN apt-get update \
+ && apt-get install -y locales \
+ && rm -rf /var/lib/apt/lists/* \
+ && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
+ && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
+ && locale-gen en_US.UTF-8 \
+ && dpkg-reconfigure locales \
+ && /usr/sbin/update-locale LANG=en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:UTF-8
+ENV LC_ALL en_US.UTF-8
 
 # Fix a bug for openjdk-11-jre-headless
 RUN mkdir -p /usr/share/man/man1
