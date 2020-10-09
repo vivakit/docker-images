@@ -6,6 +6,10 @@ ENV TZ Etc/UTC
 RUN echo "${TZ}" > /etc/timezone
 RUN ln -fs "/usr/share/zoneinfo/${TZ}" /etc/localtime
 
+# Create working directory
+RUN mkdir -p /app
+WORKDIR /app
+
 # Install needed packages for erlang, elixir or phoenix
 RUN apt-get update -q \
  && apt-get install -y \
