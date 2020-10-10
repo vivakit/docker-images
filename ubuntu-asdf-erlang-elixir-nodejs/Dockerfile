@@ -13,6 +13,7 @@ WORKDIR /app
 # Install needed packages for erlang, elixir or phoenix
 RUN apt-get update -q \
  && apt-get install -y \
+    ca-certificates \
     autoconf \
     make \
     build-essential \
@@ -95,7 +96,7 @@ RUN mix local.hex --force \
  && mix local.rebar --force
 
 # Install nodejs
-ENV NODEJS_VERSION 12.18.4
+ENV NODEJS_VERSION 12.19.0
 RUN asdf install nodejs ${NODEJS_VERSION} \
  && asdf global nodejs ${NODEJS_VERSION}
 
