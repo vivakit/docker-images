@@ -87,7 +87,7 @@ RUN asdf install erlang ${ERLANG_VERSION} \
  && asdf global erlang ${ERLANG_VERSION}
 
 # Install elixir
-ENV ELIXIR_VERSION 1.11.0
+ENV ELIXIR_VERSION 1.11.2
 RUN asdf install elixir ${ELIXIR_VERSION} \
  && asdf global elixir ${ELIXIR_VERSION}
 
@@ -96,7 +96,7 @@ RUN mix local.hex --force \
  && mix local.rebar --force
 
 # Install nodejs
-ENV NODEJS_VERSION 12.19.0
+ENV NODEJS_VERSION 14.15.1
 RUN asdf install nodejs ${NODEJS_VERSION} \
  && asdf global nodejs ${NODEJS_VERSION}
 
