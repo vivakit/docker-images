@@ -124,5 +124,3 @@ RUN asdf install nodejs ${NODEJS_VERSION} \
 ENV PYTHON_VERSION 3.8.6
 RUN asdf install python ${PYTHON_VERSION} \
    && asdf global python ${PYTHON_VERSION}
-
-RUN convert --version
