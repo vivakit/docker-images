@@ -17,8 +17,8 @@ build-all: build-debian build-ubuntu
 
 .PHONY: build-debian
 build-debian:
-	docker build ./debian-asdf-erlang-elixir-nodejs -t vivakit/debian-asdf-erlang-elixir-nodejs:$(VERSION)
+	docker build ./debian-asdf-erlang-elixir-nodejs -t vivakit/debian-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
 
 .PHONY: build-ubuntu
 build-ubuntu:
-	docker build ./ubuntu-asdf-erlang-elixir-nodejs -t vivakit/ubuntu-asdf-erlang-elixir-nodejs:$(VERSION)
+	docker build ./ubuntu-asdf-erlang-elixir-nodejs -t vivakit/ubuntu-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
