@@ -80,12 +80,12 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Install erlang
-ENV ERLANG_VERSION 23.1
+ENV ERLANG_VERSION 23.3
 RUN asdf install erlang ${ERLANG_VERSION} \
    && asdf global erlang ${ERLANG_VERSION}
 
 # Install elixir
-ENV ELIXIR_VERSION 1.11.2
+ENV ELIXIR_VERSION 1.11.4
 RUN asdf install elixir ${ELIXIR_VERSION} \
    && asdf global elixir ${ELIXIR_VERSION}
 
@@ -94,11 +94,11 @@ RUN mix local.hex --force \
    && mix local.rebar --force
 
 # Install nodejs
-ENV NODEJS_VERSION 14.15.1
+ENV NODEJS_VERSION 14.16.1
 RUN asdf install nodejs ${NODEJS_VERSION} \
    && asdf global nodejs ${NODEJS_VERSION}
 
 # Install python
-ENV PYTHON_VERSION 3.8.6
+ENV PYTHON_VERSION 3.8.9
 RUN asdf install python ${PYTHON_VERSION} \
    && asdf global python ${PYTHON_VERSION}
