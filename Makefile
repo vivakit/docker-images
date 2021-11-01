@@ -13,11 +13,15 @@ ifneq ($(shell git status --porcelain),)
     VERSION := $(VERSION)-dirty
 endif
 
-build-all: build-debian build-ubuntu
+build-all: build-debian build-ubuntu build-debian-backup-postgresql-to-b2
 
 .PHONY: build-debian
 build-debian:
 	docker build ./debian-asdf-erlang-elixir-nodejs -t vivakit/debian-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
+
+.PHONY: build-debian-backup-postgresql-to-b2
+build-debian-backup-postgresql-to-b2:
+	docker build ./debian-backup-postgresql-to-b2 -t vivakit/debian-backup-postgresql-to-b2:$(VERSION) --progress=plain
 
 .PHONY: build-ubuntu
 build-ubuntu:
