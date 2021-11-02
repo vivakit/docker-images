@@ -26,3 +26,5 @@ build-debian-backup-postgresql-to-b2:
 .PHONY: build-ubuntu
 build-ubuntu:
 	docker build ./ubuntu-asdf-erlang-elixir-nodejs -t vivakit/ubuntu-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
+
+# git tag -a 'v0.0.9' -m "v0.0.9"
