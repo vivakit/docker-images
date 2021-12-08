@@ -14,6 +14,7 @@ ifneq ($(shell git status --porcelain),)
 endif
 
 build-all: build-debian build-ubuntu build-debian-backup-postgresql-to-b2
+push-all: push-debian push-ubuntu push-debian-backup-postgresql-to-b2
 
 .PHONY: build-debian
 build-debian:
@@ -26,5 +27,17 @@ build-debian-backup-postgresql-to-b2:
 .PHONY: build-ubuntu
 build-ubuntu:
 	docker build ./ubuntu-asdf-erlang-elixir-nodejs -t vivakit/ubuntu-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
+
+.PHONY: push-debian
+push-debian:
+	docker push vivakit/debian-asdf-erlang-elixir-nodejs:$(VERSION)
+
+.PHONY: push-debian-backup-postgresql-to-b2
+push-debian-backup-postgresql-to-b2:
+	docker push vivakit/debian-backup-postgresql-to-b2:$(VERSION)
+
+.PHONY: push-ubuntu
+push-ubuntu:
+	docker push vivakit/ubuntu-asdf-erlang-elixir-nodejs:$(VERSION)
 
 # git tag -a 'v0.0.9' -m "v0.0.9"
