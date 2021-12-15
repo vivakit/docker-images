@@ -1,4 +1,4 @@
-FROM debian:buster-slim AS base
+FROM debian:bullseye-slim AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN=true
@@ -50,7 +50,7 @@ RUN mkdir -p /usr/share/man/man1 \
    && rm -rf /var/lib/apt/lists/*
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-   && echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"-pgdg main | tee /etc/apt/sources.list.d/pgdg.list \
+   && echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main"-pgdg main | tee /etc/apt/sources.list.d/pgdg.list \
    && apt-get update -q \
    && apt-get install -y \
    postgis \
