@@ -54,9 +54,9 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
    && apt-get update -q \
    && apt-get install -y \
    postgis \
-   postgresql-12 \
-   postgresql-12-postgis-3 \
-   postgresql-12-postgis-3-scripts \
+   postgresql-13 \
+   postgresql-13-postgis-3 \
+   postgresql-13-postgis-3-scripts \
    && apt-get clean
 
 RUN mkdir -p /build
