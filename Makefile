@@ -18,15 +18,15 @@ push-all: push-debian push-ubuntu push-debian-backup-postgresql-to-b2
 
 .PHONY: build-debian
 build-debian:
-	docker build ./debian-asdf-erlang-elixir-nodejs -t vivakit/debian-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
+	docker buildx build --platform linux/amd64,linux/arm64 ./debian-asdf-erlang-elixir-nodejs -t vivakit/debian-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
 
 .PHONY: build-debian-backup-postgresql-to-b2
 build-debian-backup-postgresql-to-b2:
-	docker build ./debian-backup-postgresql-to-b2 -t vivakit/debian-backup-postgresql-to-b2:$(VERSION) --progress=plain
+	docker buildx build --platform linux/amd64,linux/arm64 ./debian-backup-postgresql-to-b2 -t vivakit/debian-backup-postgresql-to-b2:$(VERSION) --progress=plain
 
 .PHONY: build-ubuntu
 build-ubuntu:
-	docker build ./ubuntu-asdf-erlang-elixir-nodejs -t vivakit/ubuntu-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
+	docker buildx build --platform linux/amd64,linux/arm64 ./ubuntu-asdf-erlang-elixir-nodejs -t vivakit/ubuntu-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
 
 .PHONY: push-debian
 push-debian:
