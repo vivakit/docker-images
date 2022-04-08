@@ -79,12 +79,12 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Install erlang
-ENV ERLANG_VERSION 24.2.2
+ENV ERLANG_VERSION 24.3.3
 RUN asdf install erlang ${ERLANG_VERSION} \
    && asdf global erlang ${ERLANG_VERSION}
 
 # Install elixir
-ENV ELIXIR_VERSION 1.13.3
+ENV ELIXIR_VERSION 1.13.4
 RUN asdf install elixir ${ELIXIR_VERSION} \
    && asdf global elixir ${ELIXIR_VERSION}
 
