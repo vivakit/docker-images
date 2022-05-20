@@ -85,7 +85,7 @@ RUN mkdir -p /build
 # Install ASDF VM and plugins
 # ASDF will only correctly install plugins into the home directory
 ENV ASDF_ROOT /root/.asdf
-ENV ASDF_VERSION v0.9.0
+ENV ASDF_VERSION v0.10.1
 ENV PATH "${ASDF_ROOT}/bin:${ASDF_ROOT}/shims:$PATH"
 
 RUN git clone https://github.com/asdf-vm/asdf.git "${ASDF_ROOT}" --branch "${ASDF_VERSION}" \
@@ -101,7 +101,7 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Install erlang
-ENV ERLANG_VERSION 24.3.3
+ENV ERLANG_VERSION 25.0
 RUN asdf install erlang ${ERLANG_VERSION} \
    && asdf global erlang ${ERLANG_VERSION}
 
@@ -115,11 +115,11 @@ RUN mix local.hex --force \
    && mix local.rebar --force
 
 # Install nodejs
-ENV NODEJS_VERSION 16.14.0
+ENV NODEJS_VERSION 16.15.0
 RUN asdf install nodejs ${NODEJS_VERSION} \
    && asdf global nodejs ${NODEJS_VERSION}
 
 # Install python
-ENV PYTHON_VERSION 3.8.12
+ENV PYTHON_VERSION 3.8.13
 RUN asdf install python ${PYTHON_VERSION} \
    && asdf global python ${PYTHON_VERSION}

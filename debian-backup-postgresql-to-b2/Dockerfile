@@ -64,7 +64,7 @@ RUN mkdir -p /build
 # Install ASDF VM and plugins
 # ASDF will only correctly install plugins into the home directory
 ENV ASDF_ROOT /root/.asdf
-ENV ASDF_VERSION v0.9.0
+ENV ASDF_VERSION v0.10.1
 ENV PATH "${ASDF_ROOT}/bin:${ASDF_ROOT}/shims:$PATH"
 
 RUN git clone https://github.com/asdf-vm/asdf.git "${ASDF_ROOT}" --branch "${ASDF_VERSION}" \
@@ -77,7 +77,7 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Install python
-ENV PYTHON_VERSION 3.8.12
+ENV PYTHON_VERSION 3.8.13
 RUN asdf install python ${PYTHON_VERSION} \
    && asdf global python ${PYTHON_VERSION}
 
@@ -85,7 +85,7 @@ RUN asdf install python ${PYTHON_VERSION} \
 ENV B2_VERSION 3.0.3
 RUN python3 -m pip install b2==${B2_VERSION}
 
-ENV PATH=/root/.asdf/installs/python/3.8.12/bin:$PATH
+ENV PATH=/root/.asdf/installs/python/3.8.13/bin:$PATH
 
 # Check commands are available
 RUN b2 --help
