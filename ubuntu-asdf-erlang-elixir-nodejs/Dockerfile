@@ -25,6 +25,7 @@ RUN apt-get update -q \
    libpq-dev \
    libssh-dev \
    libwxgtk3.0-gtk3-dev \
+   libwxgtk-webview3.0-gtk3-dev \
    locales \
    postgis \
    tzdata \
@@ -79,7 +80,7 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Install erlang
-ENV ERLANG_VERSION 25.0
+ENV ERLANG_VERSION 25.0.2
 RUN asdf install erlang ${ERLANG_VERSION} \
    && asdf global erlang ${ERLANG_VERSION}
 
