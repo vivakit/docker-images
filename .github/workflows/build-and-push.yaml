@@ -1,9 +1,9 @@
 name: build-and-push
 
-on:
-  push:
-    branches:
-      - 'master'
+on: push
+  # push:
+  #   branches:
+  #     - 'master'
 
 jobs:
   docker:
@@ -26,6 +26,6 @@ jobs:
           context: "{{defaultContext}}:${{ matrix.dir }}"
           platforms: linux/amd64 #,linux/arm64 - disabled for now, JIT support makes it crash during build :x
           push: true
-          cache-from: type=registry,ref=vivakit/${{ matrix.dir }}:buildcache
-          cache-to: type=registry,ref=vivakit/${{ matrix.dir }}:buildcache,mode=max
-          tags: vivakit/${{ matrix.dir }}:${{ github.sha }}
+          cache-from: type=registry,ref=achedeuzot/${{ matrix.dir }}:buildcache
+          cache-to: type=registry,ref=achedeuzot/${{ matrix.dir }}:buildcache,mode=max
+          tags: achedeuzot/${{ matrix.dir }}:${{ github.sha }}
