@@ -82,10 +82,10 @@ RUN asdf install python ${PYTHON_VERSION} \
    && asdf global python ${PYTHON_VERSION}
 
 # Install b2 CLI
-ENV B2_VERSION 3.0.3
+ENV B2_VERSION 3.9.0
 RUN python3 -m pip install b2==${B2_VERSION}
 
-ENV PATH=/root/.asdf/installs/python/3.10.10/bin:$PATH
+ENV PATH=/root/.asdf/installs/python/${PYTHON_VERSION}/bin:$PATH
 
 # Check commands are available
 RUN b2 --help
