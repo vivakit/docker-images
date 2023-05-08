@@ -77,7 +77,7 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Install python
-ENV PYTHON_VERSION 3.10.10
+ENV PYTHON_VERSION 3.11.3
 RUN asdf install python ${PYTHON_VERSION} \
    && asdf global python ${PYTHON_VERSION}
 
