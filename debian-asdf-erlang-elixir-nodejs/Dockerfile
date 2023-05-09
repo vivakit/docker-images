@@ -124,3 +124,5 @@ RUN asdf install nodejs ${NODEJS_VERSION} \
 ENV PYTHON_VERSION 3.11.3
 RUN asdf install python ${PYTHON_VERSION} \
    && asdf global python ${PYTHON_VERSION}
+
+RUN asdf list
