@@ -9,7 +9,15 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     strategy:
-      matrix: { dir: ['debian-asdf-erlang-elixir-nodejs', 'debian-backup-postgresql-to-b2', 'ubuntu-asdf-erlang-elixir-nodejs'] }
+      matrix:
+        {
+          dir:
+            [
+              "debian-asdf-erlang-elixir-nodejs",
+              "debian-backup-postgresql-to-b2",
+              "ubuntu-asdf-erlang-elixir-nodejs",
+            ],
+        }
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -24,7 +32,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: "{{defaultContext}}:${{ matrix.dir }}"
-          platforms: linux/amd64 #,linux/arm64 - disabled for now, JIT support makes it crash during build :x
+          platforms: linux/amd64,linux/arm64 #,linux/arm64 - disabled for now, JIT support makes it crash during build :x
           push: true
           cache-from: type=registry,ref=vivakit/${{ matrix.dir }}:buildcache
           cache-to: type=registry,ref=vivakit/${{ matrix.dir }}:buildcache,mode=max
