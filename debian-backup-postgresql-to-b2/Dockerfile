@@ -83,7 +83,7 @@ RUN asdf install python ${PYTHON_VERSION} \
 
 # Install b2 CLI
 ENV B2_VERSION 3.9.0
-RUN python3 -m pip install b2==${B2_VERSION}
+RUN python -m pip install b2==${B2_VERSION}
 
 ENV PATH=/root/.asdf/installs/python/${PYTHON_VERSION}/bin:$PATH
 

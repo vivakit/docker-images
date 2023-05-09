@@ -1,6 +1,7 @@
 name: build-and-push
 
-on: push
+on:
+  push
   # push:
   #   branches:
   #     - 'master'
