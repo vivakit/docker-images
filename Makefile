@@ -1,6 +1,7 @@
 TAG_COMMIT := $(shell git rev-list --abbrev-commit --tags --max-count=1)
 TAG := $(shell git describe --abbrev=0 --tags ${TAG_COMMIT} 2>/dev/null || true)
 COMMIT := $(shell git rev-parse --short HEAD)
+COMMIT_SHA := $(shell git rev-parse HEAD)
 DATE := $(shell git log -1 --format=%cd --date=format:"%Y%m%d")
 VERSION := $(TAG:v%=%)
 ifneq ($(COMMIT), $(TAG_COMMIT))
@@ -13,12 +14,19 @@ ifneq ($(shell git status --porcelain),)
     VERSION := $(VERSION)-dirty
 endif
 
+VERSION = $(COMMIT_SHA)
+
 build-all: build-debian build-ubuntu build-debian-backup-postgresql-to-b2
 push-all: push-debian push-ubuntu push-debian-backup-postgresql-to-b2
 
 .PHONY: build-debian
 build-debian:
-	docker buildx build --platform linux/amd64,linux/arm64 ./debian-asdf-erlang-elixir-nodejs -t vivakit/debian-asdf-erlang-elixir-nodejs:$(VERSION) --progress=plain
+	docker buildx build --push --platform linux/amd64,linux/arm64 \
+	./debian-asdf-erlang-elixir-nodejs \
+	-t vivakit/debian-asdf-erlang-elixir-nodejs:$(VERSION) \
+	--cache-to type=registry,ref=vivakit/debian-asdf-erlang-elixir-nodejs:buildcache \
+  --cache-from type=registry,ref=vivakit/debian-asdf-erlang-elixir-nodejs:buildcache \
+	--progress=plain
 
 .PHONY: build-debian-backup-postgresql-to-b2
 build-debian-backup-postgresql-to-b2:
