@@ -86,7 +86,7 @@ RUN mkdir -p /build
 # Install ASDF VM and plugins
 # ASDF will only correctly install plugins into the home directory
 ENV ASDF_ROOT /root/.asdf
-ENV ASDF_VERSION v0.11.3
+ENV ASDF_VERSION v0.13.1
 ENV PATH "${ASDF_ROOT}/bin:${ASDF_ROOT}/shims:$PATH"
 
 RUN git clone https://github.com/asdf-vm/asdf.git "${ASDF_ROOT}" --branch "${ASDF_VERSION}" \
@@ -102,12 +102,12 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Install erlang
-ENV ERLANG_VERSION 25.3.2
+ENV ERLANG_VERSION 26.1
 RUN asdf install erlang ${ERLANG_VERSION} \
    && asdf global erlang ${ERLANG_VERSION}
 
 # Install elixir
-ENV ELIXIR_VERSION 1.14.4
+ENV ELIXIR_VERSION 1.15.6
 RUN asdf install elixir ${ELIXIR_VERSION} \
    && asdf global elixir ${ELIXIR_VERSION}
 
