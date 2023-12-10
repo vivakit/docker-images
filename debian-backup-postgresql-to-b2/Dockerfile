@@ -54,9 +54,9 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
    && apt-get update -q \
    && apt-get install -y \
    postgis \
-   postgresql-13 \
-   postgresql-13-postgis-3 \
-   postgresql-13-postgis-3-scripts \
+   postgresql-14 \
+   postgresql-14-postgis-3 \
+   postgresql-14-postgis-3-scripts \
    && apt-get clean
 
 RUN mkdir -p /build
@@ -64,7 +64,7 @@ RUN mkdir -p /build
 # Install ASDF VM and plugins
 # ASDF will only correctly install plugins into the home directory
 ENV ASDF_ROOT /root/.asdf
-ENV ASDF_VERSION v0.11.3
+ENV ASDF_VERSION v0.13.1
 ENV PATH "${ASDF_ROOT}/bin:${ASDF_ROOT}/shims:$PATH"
 
 RUN git clone https://github.com/asdf-vm/asdf.git "${ASDF_ROOT}" --branch "${ASDF_VERSION}" \
