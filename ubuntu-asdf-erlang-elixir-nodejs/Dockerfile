@@ -63,7 +63,7 @@ RUN mkdir -p /build
 # Install ASDF VM and plugins
 # ASDF will only correctly install plugins into the home directory
 ENV ASDF_ROOT /root/.asdf
-ENV ASDF_VERSION v0.13.1
+ENV ASDF_VERSION v0.14.0
 ENV PATH "${ASDF_ROOT}/bin:${ASDF_ROOT}/shims:$PATH"
 
 RUN git clone https://github.com/asdf-vm/asdf.git "${ASDF_ROOT}" --branch "${ASDF_VERSION}" \
