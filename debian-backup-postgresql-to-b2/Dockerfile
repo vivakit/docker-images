@@ -2,7 +2,7 @@ FROM debian:bullseye-slim AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN=true
-ENV TZ Etc/UTC
+ENV TZ=Etc/UTC
 RUN echo "${TZ}" > /etc/timezone \
    && ln -fs "/usr/share/zoneinfo/${TZ}" /etc/localtime \
    && mkdir -p /app
@@ -16,9 +16,9 @@ RUN apt-get update \
    && locale-gen en_US.UTF-8 \
    && dpkg-reconfigure locales \
    && /usr/sbin/update-locale LANG=en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:UTF-8
-ENV LC_ALL en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:UTF-8
+ENV LC_ALL=en_US.UTF-8
 
 # Fix a bug for openjdk-11-jre-headless before installing all OS dependencies
 RUN mkdir -p /usr/share/man/man1 \
@@ -63,26 +63,33 @@ RUN mkdir -p /build
 
 # Install ASDF VM and plugins
 # ASDF will only correctly install plugins into the home directory
-ENV ASDF_ROOT /root/.asdf
-ENV ASDF_VERSION v0.14.0
-ENV PATH "${ASDF_ROOT}/bin:${ASDF_ROOT}/shims:$PATH"
+ENV ASDF_VERSION=v0.16.5
+ENV ASDF_DATA_DIR=/root/.asdf
 
-RUN git clone https://github.com/asdf-vm/asdf.git "${ASDF_ROOT}" --branch "${ASDF_VERSION}" \
-   && asdf plugin add python https://github.com/danhper/asdf-python.git
+RUN mkdir /root/bin \
+   && wget https://github.com/asdf-vm/asdf/releases/download/${ASDF_VERSION}/asdf-${ASDF_VERSION}-linux-amd64.tar.gz \
+   && tar -xvzf asdf-${ASDF_VERSION}-linux-amd64.tar.gz -C /root/bin \
+   && rm asdf-${ASDF_VERSION}-linux-amd64.tar.gz \
+   && chmod +x /root/bin/asdf
+
+ENV PATH=${ASDF_DATA_DIR}/shims:/root/bin:$PATH
+
+# Install asdf plugins
+RUN asdf plugin add python https://github.com/danhper/asdf-python.git
 
 # Set locales & TimeZone
 RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
 
 # Install python
-ENV PYTHON_VERSION 3.11.3
+ENV PYTHON_VERSION=3.12.9
 RUN asdf install python ${PYTHON_VERSION} \
-   && asdf global python ${PYTHON_VERSION}
+   && asdf set python ${PYTHON_VERSION}
 
 # Install b2 CLI
-ENV B2_VERSION 3.9.0
+ENV B2_VERSION 4.3.0
 RUN python -m pip install b2==${B2_VERSION}
 
 ENV PATH=/root/.asdf/installs/python/${PYTHON_VERSION}/bin:$PATH
