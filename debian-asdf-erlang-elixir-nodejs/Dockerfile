@@ -109,7 +109,7 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
 # Install erlang
-ENV ERLANG_VERSION=27.3
+ENV ERLANG_VERSION=27.3.3
 RUN asdf install erlang ${ERLANG_VERSION} \
    && asdf set erlang ${ERLANG_VERSION}
 
