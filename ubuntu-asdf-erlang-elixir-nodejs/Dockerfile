@@ -24,7 +24,7 @@ RUN apt-get update -q \
    libpng-dev \
    libpq-dev \
    libssh-dev \
-   libwxgtk3.0-gtk3-dev \
+   wx-common \
    locales \
    postgis \
    tzdata \
@@ -53,16 +53,16 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main" | tee /e
 RUN apt-get update -q \
    && apt-get install -y \
    postgis \
-   postgresql-12 \
-   postgresql-12-postgis-3 \
-   postgresql-12-postgis-3-scripts \
+   postgresql-14 \
+   postgresql-14-postgis-3 \
+   postgresql-14-postgis-3-scripts \
    && apt-get clean
 
 RUN mkdir -p /build
 
 # Install ASDF VM and plugins
 # ASDF will only correctly install plugins into the home directory
-ENV ASDF_VERSION=v0.16.5
+ENV ASDF_VERSION=v0.18.0
 ENV ASDF_DATA_DIR=/root/.asdf
 
 RUN mkdir /root/bin \
@@ -86,12 +86,12 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
 # Install erlang
-ENV ERLANG_VERSION=27.3.3
+ENV ERLANG_VERSION=28.1
 RUN asdf install erlang ${ERLANG_VERSION} \
    && asdf set erlang ${ERLANG_VERSION}
 
 # Install elixir
-ENV ELIXIR_VERSION=1.18.3
+ENV ELIXIR_VERSION=1.18.4
 RUN asdf install elixir ${ELIXIR_VERSION} \
    && asdf set elixir ${ELIXIR_VERSION}
 
@@ -100,12 +100,12 @@ RUN mix local.hex --force \
    && mix local.rebar --force
 
 # Install nodejs
-ENV NODEJS_VERSION=22.14.0
+ENV NODEJS_VERSION=22.20.0
 RUN asdf install nodejs ${NODEJS_VERSION} \
    && asdf set nodejs ${NODEJS_VERSION}
 
 # Install python
-ENV PYTHON_VERSION=3.12.9
+ENV PYTHON_VERSION=3.13.6
 RUN asdf install python ${PYTHON_VERSION} \
    && asdf set python ${PYTHON_VERSION}
 

@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim AS base
+FROM debian:trixie-slim AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN=true
@@ -49,8 +49,8 @@ RUN mkdir -p /usr/share/man/man1 \
    && apt-get clean \
    && rm -rf /var/lib/apt/lists/*
 
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-   && echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main"-pgdg main | tee /etc/apt/sources.list.d/pgdg.list \
+RUN wget -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc > /usr/share/keyrings/postgresql-archive-keyring.gpg \
+   && echo "deb [signed-by=/usr/share/keyrings/postgresql-archive-keyring.gpg] https://apt.postgresql.org/pub/repos/apt trixie-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list \
    && apt-get update -q \
    && apt-get install -y \
    postgis \
@@ -63,7 +63,7 @@ RUN mkdir -p /build
 
 # Install ASDF VM and plugins
 # ASDF will only correctly install plugins into the home directory
-ENV ASDF_VERSION=v0.16.5
+ENV ASDF_VERSION=v0.18.0
 ENV ASDF_DATA_DIR=/root/.asdf
 
 RUN mkdir /root/bin \
@@ -84,12 +84,12 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
 # Install python
-ENV PYTHON_VERSION=3.12.9
+ENV PYTHON_VERSION=3.13.6
 RUN asdf install python ${PYTHON_VERSION} \
    && asdf set python ${PYTHON_VERSION}
 
 # Install b2 CLI
-ENV B2_VERSION 4.3.0
+ENV B2_VERSION=4.4.2
 RUN python -m pip install b2==${B2_VERSION}
 
 ENV PATH=/root/.asdf/installs/python/${PYTHON_VERSION}/bin:$PATH
