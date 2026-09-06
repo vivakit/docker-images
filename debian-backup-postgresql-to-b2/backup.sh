@@ -57,10 +57,10 @@ pg_dump $POSTGRES_HOST_OPTS $POSTGRES_DATABASE | gzip > dump.sql.gz
 
 echo "Authenticating to b2..."
 
-b2 authorize-account "${B2_APPLICATION_KEY_ID}" "${B2_APPLICATION_KEY}"
+b2 account authorize "${B2_APPLICATION_KEY_ID}" "${B2_APPLICATION_KEY}"
 
 echo "Uploading dump to $B2_BUCKET"
 
-b2 upload-file ${B2_BUCKET} ./dump.sql.gz ${B2_PREFIX}/${POSTGRES_DATABASE}_$(date +"%Y-%m-%dT%H-%M-%SZ").sql.gz || exit 2
+b2 file upload ${B2_BUCKET} ./dump.sql.gz ${B2_PREFIX}/${POSTGRES_DATABASE}_$(date +"%Y-%m-%dT%H-%M-%SZ").sql.gz || exit 2
 
 echo "SQL backup uploaded successfully"
