@@ -54,9 +54,9 @@ RUN wget -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc > /usr/share/ke
    && apt-get update -q \
    && apt-get install -y \
    postgis \
-   postgresql-14 \
-   postgresql-14-postgis-3 \
-   postgresql-14-postgis-3-scripts \
+   postgresql-18 \
+   postgresql-18-postgis-3 \
+   postgresql-18-postgis-3-scripts \
    && apt-get clean
 
 RUN mkdir -p /build
